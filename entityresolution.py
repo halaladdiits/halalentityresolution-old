@@ -143,7 +143,7 @@ def setRelationBasedThreshold(driver, model, filename):
                                   +str(similarity)+" tanpa ingredients")
                             createOwlSameAsRelationQuery(driver, entity_id, similarId[0])
                             stringToWrite = str(entity_id)+"|"+str(tupple_source[0][1])+"|"+str(tupple_source[0][2])+"|null|"+\
-                                            str(similarId[0])+"|"+str(tupple_target[0][1])+"|"+str(tupple_target[0][2])+"|null|owlsameAs"
+                                            str(similarId[0])+"|"+str(tupple_target[0][1])+"|"+str(tupple_target[0][2])+"|null|owlsameAs|"+str(similarity)
                             
                             listStringWriteToFile = listStringWriteToFile + "\n" + stringToWrite
                             # writecsv("resolutionresults", stringToWrite)
@@ -159,7 +159,7 @@ def setRelationBasedThreshold(driver, model, filename):
                                 stringToWrite = str(entity_id) + "|" + str(tupple_source[0][1]) + "|" + str(
                                     tupple_source[0][2]) + "|null|" + \
                                                 str(similarId[0]) + "|" + str(tupple_target[0][1]) + "|" + str(
-                                    tupple_target[0][2]) + "|null|seeAlso"
+                                    tupple_target[0][2]) + "|null|seeAlso|"+str(similarity)
                                 listStringWriteToFile = listStringWriteToFile + "\n" + stringToWrite
                                 # writecsv("resolutionresults", stringToWrite)
                             else:
@@ -213,7 +213,7 @@ def setRelationBasedThreshold(driver, model, filename):
                             stringToWrite = str(entity_id) + "|" + str(tupple_source[0][1]) + "|" + str(
                                 tupple_source[0][2]) + "|"+ingredientsSource+"|" + \
                                             str(similarId[0]) + "|" + str(tupple_target[0][1]) + "|" + str(
-                                tupple_target[0][2]) + "|"+ingredientsTarget+"|owlsameAs"
+                                tupple_target[0][2]) + "|"+ingredientsTarget+"|owlsameAs|"+str(similarity)
                             listStringWriteToFile = listStringWriteToFile + "\n" + stringToWrite
                             # writecsv("resolutionresults", stringToWrite)
                         elif (similarity > 0.6 and similarity < 0.9):
@@ -230,7 +230,7 @@ def setRelationBasedThreshold(driver, model, filename):
                                 stringToWrite = str(entity_id) + "|" + str(tupple_source[0][1]) + "|" + str(
                                     tupple_source[0][2]) + "|" + ingredientsSource + "|" + \
                                                 str(similarId[0]) + "|" + str(tupple_target[0][1]) + "|" + str(
-                                    tupple_target[0][2]) + "|" + ingredientsTarget + "|seeAlso"
+                                    tupple_target[0][2]) + "|" + ingredientsTarget + "|seeAlso|"+str(similarity)
                                 listStringWriteToFile = listStringWriteToFile + "\n" + stringToWrite
                                 # writecsv("resolutionresults", stringToWrite)
                             else:
@@ -306,7 +306,7 @@ def setRelationBasedThresholdById(driver, model, entityId):
 
                 similarity = (0.8 * similarityProductName) + (0.2 * similaritymanufactureName)
                 print("Total similarity = " + str(similarity))
-                if (similarity >= threshold):
+                if (similarity > threshold):
                     linkcount += 1
                     writeFile = True
                     print("writing owl:sameAs to id source = " + entity_id + " to id target = " + similarId[
@@ -316,7 +316,7 @@ def setRelationBasedThresholdById(driver, model, entityId):
                     stringToWrite = str(entity_id) + "|" + str(tupple_source[0][1]) + "|" + str(
                         tupple_source[0][2]) + "|null|" + \
                                     str(similarId[0]) + "|" + str(tupple_target[0][1]) + "|" + str(
-                        tupple_target[0][2]) + "|null|owlsameAs"
+                        tupple_target[0][2]) + "|null|owlsameAs|"+str(similarity)
 
                     listStringWriteToFile = listStringWriteToFile + "\n" + stringToWrite
                     # writecsv("resolutionresults", stringToWrite)
@@ -332,7 +332,7 @@ def setRelationBasedThresholdById(driver, model, entityId):
                         stringToWrite = str(entity_id) + "|" + str(tupple_source[0][1]) + "|" + str(
                             tupple_source[0][2]) + "|null|" + \
                                         str(similarId[0]) + "|" + str(tupple_target[0][1]) + "|" + str(
-                            tupple_target[0][2]) + "|null|seeAlso"
+                            tupple_target[0][2]) + "|null|seeAlso|"+str(similarity)
                         listStringWriteToFile = listStringWriteToFile + "\n" + stringToWrite
                         # writecsv("resolutionresults", stringToWrite)
                     else:
@@ -379,7 +379,7 @@ def setRelationBasedThresholdById(driver, model, entityId):
                 similarity = (0.5 * similarityProductName) + (0.2 * similaritymanufactureName) + (
                             0.3 * similarityIngredients)
                 print("Total similarity = " + str(similarity))
-                if (similarity >= threshold):
+                if (similarity > threshold):
                     linkcount += 1
                     writeFile = True
                     print("writing owl:sameAs to id source = " + entity_id + " to id target = " + similarId[
@@ -388,7 +388,7 @@ def setRelationBasedThresholdById(driver, model, entityId):
                     stringToWrite = str(entity_id) + "|" + str(tupple_source[0][1]) + "|" + str(
                         tupple_source[0][2]) + "|" + ingredientsSource + "|" + \
                                     str(similarId[0]) + "|" + str(tupple_target[0][1]) + "|" + str(
-                        tupple_target[0][2]) + "|" + ingredientsTarget + "|owlsameAs"
+                        tupple_target[0][2]) + "|" + ingredientsTarget + "|owlsameAs|"+str(similarity)
                     listStringWriteToFile = listStringWriteToFile + "\n" + stringToWrite
                     # writecsv("resolutionresults", stringToWrite)
                 elif (similarity > 0.6 and similarity < 0.9):
@@ -405,7 +405,7 @@ def setRelationBasedThresholdById(driver, model, entityId):
                         stringToWrite = str(entity_id) + "|" + str(tupple_source[0][1]) + "|" + str(
                             tupple_source[0][2]) + "|" + ingredientsSource + "|" + \
                                         str(similarId[0]) + "|" + str(tupple_target[0][1]) + "|" + str(
-                            tupple_target[0][2]) + "|" + ingredientsTarget + "|seeAlso"
+                            tupple_target[0][2]) + "|" + ingredientsTarget + "|seeAlso|"+str(similarity)
                         listStringWriteToFile = listStringWriteToFile + "\n" + stringToWrite
                         # writecsv("resolutionresults", stringToWrite)
                     else:
@@ -417,8 +417,7 @@ def setRelationBasedThresholdById(driver, model, entityId):
                 print("error when trying to comparing entities with ingredients = " + str(ex))
 
     if (writeFile == True):
-        i += 1
-        writecsv("resolutionresults", listStringWriteToFile)
+        writecsv("resolutionresults_"+str(entityId), listStringWriteToFile)
         listStringWriteToFile = ""
     else:
         listStringWriteToFile = ""
@@ -490,7 +489,7 @@ def checkSimilarityJaccard(str1, str2):
     str1 = str1.lower()
     str2 = str2.lower()
     similarity = textdistance.jaccard.similarity(str1,str2)
-    print("Comparing " + str(str1) + " with " + str(str2)+". Hasil similaritynya = "+str(similarity))
+    # print("Comparing " + str(str1) + " with " + str(str2)+". Hasil similaritynya = "+str(similarity))
     return similarity
 
 def checkSimilarityJaro(str1, str2):
@@ -498,7 +497,7 @@ def checkSimilarityJaro(str1, str2):
     str1 = str1.lower()
     str2 = str2.lower()
     similarity = textdistance.jaro_winkler.similarity(str1,str2)
-    print("Comparing " + str(str1) + " with " + str(str2)+". Hasil similaritynya = "+str(similarity))
+    # print("Comparing " + str(str1) + " with " + str(str2)+". Hasil similaritynya = "+str(similarity))
     return similarity
 
 if __name__ == '__main__':
@@ -529,15 +528,15 @@ if __name__ == '__main__':
     model = KeyedVectors.load_word2vec_format(filename, binary=False)
 
     #--Step 3
-    ##Tes the similar result base on graph embedding process model,
+    ##Tes the similar result base on graph embedding process model to get entity profiles candidate,
     # neo4j_most_similar(driver, model, 'Cereal Energen Kacang Hijau')
     # neo4j_most_similar(driver, model, 'Energen rasa kacang hijau')
-    neo4j_most_similar(driver, model, 'Nissin Wafer Krim Coklat')
+    neo4j_most_similar(driver, model, 'Nissin Wafer Krim Coklat Chocolate Wafer Cream ')
 
     #--Step 4 run entity resolution task by id
     #you can use method setRelationBasedThresholdById or setRelationBasedThreshold to iterate all of id in the .emb file
-    # entity_id = neo4jgetIdbyLabel(driver, 'Nissin Wafer Krim Rasa Pisang')
-    # setRelationBasedThresholdById(driver, model, filename, entity_id)
+    # entity_id = neo4jgetIdbyLabel(driver, 'Nissin Wafer Krim Vanila Susu')
+    # setRelationBasedThresholdById(driver, model, entity_id)
     # setRelationBasedThreshold(driver, model, filename)
 
     ##NOT IMPORTANT
